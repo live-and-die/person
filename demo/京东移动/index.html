@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable="no">
+	<title>jd移动端开发</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<link rel="stylesheet" href="css/swiper-3.4.2.min.css" type="text/css">
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_519515_6ar2joz98gvkuik9.css">
+	<link rel="stylesheet" href="css/public.css" type="text/css">
+	<link rel="stylesheet" href="css/index.css" type="text/css">
+	<!-- rem布局需求的js，将一段rem的less样式布局尺寸转化为css的px 
+		监听了窗口变化事件动态设置rem比例-->
+	<script>
+			var html = document.querySelector('html');
+			changeRem();
+			window.addEventListener('resize',changeRem);
+			function changeRem() {
+				var width = html.getBoundingClientRect().width;
+				// console.log( width );
+				html.style.fontSize = width/10+ 'px';
+			}
+
+	</script>
+</head>
+<body>
+	<div class="jd">
+		<!-- 京东移动端头部 -->
+		<div class="jd-header">
+			<div class="search-box">
+				<form action="">
+					<input type="text" placeholder="圣诞好礼下载APP可领">
+					<i class="iconfont icon-search"></i>
+				</form>
+				<a href="">登录</a>	
+			</div>
+			<!-- 轮播图swiper -->
+			<div class="swiper-container">
+			    <div class="swiper-wrapper">
+			        <div class="swiper-slide">
+			        	<img src="images/01-banner/1.jpg" alt="">
+			        </div>
+			        <div class="swiper-slide">
+			        	<img src="images/01-banner/2.jpg" alt="">
+			        </div>
+			        <div class="swiper-slide">
+			        	<img src="images/01-banner/3.jpg" alt="">
+			        </div>
+			    </div>
+			    <!-- 如果需要分页器 -->
+			    <div class="swiper-pagination"></div>
+			</div>	
+			<!-- 导航 -->
+			<nav class="nav-wrap">
+				<a href=""><img src="images/02-nav/1.png" alt=""><span>京东超市</span></a>
+				<a href=""><img src="images/02-nav/2.png" alt=""><span>全球购</span></a>
+				<a href=""><img src="images/02-nav/3.png" alt=""><span>京东服饰</span></a>
+				<a href=""><img src="images/02-nav/4.png" alt=""><span>京东生鲜</span></a>
+				<a href=""><img src="images/02-nav/5.png" alt=""><span>京东到家</span></a>
+				<a href=""><img src="images/02-nav/6.png" alt=""><span>充值缴费</span></a>
+				<a href=""><img src="images/02-nav/7.png" alt=""><span>领京豆</span></a>
+				<a href=""><img src="images/02-nav/8.png" alt=""><span>领券</span></a>
+				<a href=""><img src="images/02-nav/9.png" alt=""><span>赚钱</span></a>
+				<a href=""><img src="images/02-nav/10.png" alt=""><span>物流查询</span></a>
+			</nav>
+			<!-- 圣诞快乐 -->
+				<section class="christmas">
+					<div class="christmas-top"></div>
+					<div class="christmas-bottom">
+						<!-- 圣诞轮播图 有3页-->
+						<div class="christmas-bottom-img">
+							<div class="swiper-container-1">
+								<div class="swiper-wrapper">
+								   <div class="swiper-slide">
+								   	<a href=""><img src="images/03-christmas/06.png" alt=""></a>
+								   </div>
+								   <div class="swiper-slide">
+								   	<a href=""><img src="images/03-christmas/04.png" alt=""></a>
+								   </div>
+								   <div class="swiper-slide">
+								   	<a href=""><img src="images/03-christmas/05.png" alt=""></a>
+								   </div>
+								</div>
+							</div>
+							<div class="swiper-container-1">
+								<div class="swiper-wrapper">
+								   <div class="swiper-slide">
+								   	<a href=""><img src="images/03-christmas/04.png" alt=""></a>
+								   </div>
+								   <div class="swiper-slide">
+								   	<a href=""><img src="images/03-christmas/05.png" alt=""></a>
+								   </div>
+								   <div class="swiper-slide">
+								   	<a href=""><img src="images/03-christmas/06.png" alt=""></a>
+								   </div>
+								</div>
+							</div>
+							<div class="swiper-container-1">
+								<div class="swiper-wrapper">
+								   <div class="swiper-slide">
+								   	<a href=""><img src="images/03-christmas/05.png" alt=""></a>
+								   </div>
+								   <div class="swiper-slide">
+								   	<a href=""><img src="images/03-christmas/06.png" alt=""></a>
+								   </div>
+								   <div class="swiper-slide">
+								   	<a href=""><img src="images/03-christmas/04.png" alt=""></a>
+								   </div>
+								</div>
+							</div>
+						</div>
+						<span>您还未登录喔！点击抽奖先登录</span>
+					</div>
+				</section>
+			<!-- 京东快报 -->
+				<div class="fastnews">
+					<a href=""><img src="images/04-find/1.png" alt=""></a>
+					<p><i>热门</i><span>最耐摔的“iPhoneX手机”</span></p>
+					<a href="">更多</a>
+
+				</div>
+			<!-- 京东秒杀 -->
+				<section class="skill">
+					<div class="skill-title">
+						<a href=""><img src="images/04-find/skill.png" alt=""></a>
+						<b>0点场</b>
+						<div class="time">05:20:16</div>
+						<a href="">京东尖货秒</a>
+						<i class="iconfont icon-you"></i>
+					</div>
+					
+				<div class="swiper-container-3">
+				  <div class="swiper-wrapper">
+				    <div class="swiper-slide">
+				    	<a href="">
+							<img src="images/04-find/1.jpg" alt="">
+						</a>
+						<b>6399</b>
+						<del>6938</del>
+						
+					</div>
+				    <div class="swiper-slide">
+				    	<a href="">
+							<img src="images/04-find/2.jpg" alt="">
+						</a>
+						<b>6399</b>
+						<del>6938</del>
+						
+					</div>
+				    <div class="swiper-slide">
+				    	<a href="">
+							<img src="images/04-find/4.jpg" alt="">
+						</a>
+						<b>6399</b>
+						<del>6938</del>
+						
+					</div>
+					<div class="swiper-slide">
+						<a href="">
+							<img src="images/04-find/3.jpg" alt="">
+						</a>
+						<b>6399</b>
+						<del>6938</del>
+						
+					</div>
+					<div class="swiper-slide">
+						<a href="">
+							<img src="images/04-find/2.jpg" alt="">
+						</a>
+						<b>6399</b>
+						<del>6938</del>	
+					</div>
+				  </div>
+				</div>
+
+				</section>
+				<!-- 公共导航 -->
+				<section class="com-nav">
+					<div>
+						<span>白条商城</span>
+						<p>一元抢免息</p>
+						<a href=""><img src="images/05-comnav/01.jpg" alt=""></a>
+					</div>
+					<div>
+						<span>品牌秒杀</span>
+						<p>低价抢打牌</p>
+						<a href=""><img src="images/05-comnav/02.jpg"" alt=""></a>
+					</div>
+					<div>
+						<span>闪购</span>
+						<p>打牌持续特卖</p>
+						<a href=""><img src="images/05-comnav/03.jpg"" alt=""></a>
+					</div>
+					<div>
+						<span>爱吃</span>
+						<p>领券199~120</p>
+						<a href=""><img src="images/05-comnav/04.jpg"" alt=""></a>
+					</div>
+
+				</section>
+				<!-- //使用公共导航 -->
+				<section class="com-nav">
+					<div>
+						<span>排行榜</span>
+						<p>专属购物指南</p>
+						<a href=""><img src="images/05-comnav/05.jpg" alt=""></a>
+					</div>
+					<div>
+						<span>发现好货</span>
+						<p>发现品质生活</p>
+						<a href=""><img src="images/05-comnav/06.jpg"" alt=""></a>
+					</div>
+					<div>
+						<span>会买专辑</span>
+						<p>教你买买买</p>
+						<a href=""><img src="images/05-comnav/07.jpg"" alt=""></a>
+					</div>
+					<div>
+						<span>新品首发</span>
+						<p>华为现货抢</p>
+						<a href=""><img src="images/05-comnav/08.jpg"" alt=""></a>
+					</div>
+				</section>
+				<!-- 品质公共样式 标题-->
+				<div class="com-title">
+					<img src="images/05-comnav/2.jpg" alt="">
+
+				</div>
+	 	</div>
+		<!-- 京东移动端中间 -->
+		<div class="jd-body">
+			<!-- 公共样式2 -->
+			<section class="com-nav2">
+				<div class="com-nav2wrap">
+					<span>玩3C</span>
+					<p>iPhone 8 今日立减689元！</p>
+					<div>
+						<a href=""><img src="images/05-comnav/nav01.jpg" alt=""></a>
+						<a href=""><img src="images/05-comnav/nav02.jpg" alt=""></a>
+					</div>
+				</div>
+				<div class="com-nav2wrap">
+					<span>京东家电</span>
+					<p>开年新聚惠，最高减800！</p>
+					<div>
+						<a href=""><img src="images/05-comnav/nav03.jpg" alt=""></a>
+						<a href=""><img src="images/05-comnav/nav04.jpg" alt=""></a>
+					</div>
+				</div>
+				<div class="com-nav2wrap">
+					<span>京东超市</span>
+					<p>低至5折 部分满199减100</p>
+					<div>
+						<a href=""><img src="images/05-comnav/nav05.jpg" alt=""></a>
+						<a href=""><img src="images/05-comnav/nav06.jpg" alt=""></a>
+					</div>
+				</div>
+				<div class="com-nav2wrap">
+					<span>爱家</span>
+					<p>家具199减100 家居满199-50</p>
+					<div>
+						<a href=""><img src="images/05-comnav/nav07.jpg" alt=""></a>
+						<a href=""><img src="images/05-comnav/nav08.jpg" alt=""></a>
+					</div>
+				</div>
+			</section>
+			<section class="com-nav">
+					<div>
+						<span>排行榜</span>
+						<p>专属购物指南</p>
+						<a href=""><img src="images/05-comnav/01.jpg" alt=""></a>
+					</div>
+					<div>
+						<span>发现好货</span>
+						<p>发现品质生活</p>
+						<a href=""><img src="images/05-comnav/02.jpg"" alt=""></a>
+					</div>
+					<div>
+						<span>会买专辑</span>
+						<p>教你买买买</p>
+						<a href=""><img src="images/05-comnav/03.jpg"" alt=""></a>
+					</div>
+					<div>
+						<span>新品首发</span>
+						<p>华为现货抢</p>
+						<a href=""><img src="images/05-comnav/04.jpg" alt=""></a>
+					</div>
+				</section>
+				<!-- 轮播图四 -->
+				<section class="com-banner">
+					<div class="swiper-container-4">
+					<div class="swiper-wrapper">
+					   <div class="swiper-slide">
+					   		<a href=""><img src="images/08-com-banner/1.jpg" alt="">
+							</a>
+					   	</div>
+					   <div class="swiper-slide">
+							<a href=""><img src="images/08-com-banner/2.jpg" alt="">
+							</a>
+					   </div>
+					   <div class="swiper-slide">
+					   		<a href=""><img src="images/08-com-banner/8.jpg" alt="">
+							</a>
+					   </div>
+					</div>
+					</div>
+				</section>
+				<!-- <div class="com-title2">
+					<a href=""><img src="images/05-comnav/com-1.jpg" alt="">
+					</a>
+				</div> -->
+				<!-- 公共标题的使用 -->
+				<div class="com-title">
+					<img src="images/05-comnav/3.jpg" alt="">
+				</div>
+				<!-- 公共样式3 -->
+				<section class="com-nav3">
+					<div class="com-nav3wrap">
+						<div>
+							<b>男装馆</b>
+							<p>限量潮品2折</p>
+						</div>
+						<a href=""><img src="images/05-comnav/nav21.jpg" alt=""></a>
+					</div>
+					<div class="com-nav3wrap">
+						<div>
+							<b>手机数码</b>
+							<p>一加 5T</p>
+						</div>
+						<a href=""><img src="images/05-comnav/nav22.jpg" alt=""></a>
+						
+					</div>
+					<div class="com-nav3wrap">
+						<div>
+							<b>个护清洁</b>
+							<p>满199减100</p>
+						</div>
+						<a href=""><img src="images/05-comnav/nav23.jpg" alt=""></a>
+						
+					</div>
+					<div class="com-nav3wrap">
+						<div>
+							<b>大家电馆</b>
+							<p>满千减百</p>
+						</div>
+						<a href=""><img src="images/05-comnav/nav24.jpg" alt=""></a>
+					</div>
+				</section>
+				<!-- 公共样式1 -->
+				<section class="com-nav">
+					<div>
+						<span>排行榜</span>
+						<p>专属购物指南</p>
+						<a href=""><img src="images/05-comnav/01.jpg" alt=""></a>
+					</div>
+					<div>
+						<span>发现好货</span>
+						<p>发现品质生活</p>
+						<a href=""><img src="images/05-comnav/02.jpg"" alt=""></a>
+					</div>
+					<div>
+						<span>会买专辑</span>
+						<p>教你买买买</p>
+						<a href=""><img src="images/05-comnav/03.jpg"" alt=""></a>
+					</div>
+					<div>
+						<span>新品首发</span>
+						<p>华为现货抢</p>
+						<a href=""><img src="images/05-comnav/04.jpg" alt=""></a>
+					</div>
+				</section>
+				<!-- 公共标题3 -->
+				<section class="com-title3">
+					<div>
+						<p>
+							<i class="iconfont icon-you"></i>
+							<span>为您推荐</span>
+						</p>
+					</div>
+				</section>
+				<ul class="com-nav4">
+					<li class="com-nav4wrap">
+						<a href=""><img src="images/05-comnav/tui.jpg" alt=""></a>
+						<p>七彩云南庆沣祥 茶叶 普洱茶 熟茶散装 珍藏陈香(芽茶)铁罐装 250g</p>
+						<span>￥350.00</span>
+						<div class="com-nav4wrap-bottom">
+							<span>好评98%</span>
+							<a href="" class="fr">看相似</a>
+						</div>
+					</li>
+					<li class="com-nav4wrap">
+						<a href=""><img src="images/05-comnav/tui2.jpg" alt=""></a>
+						<p>Blistex百蕾适/碧唇小蓝罐修护润唇膏7g 保湿滋润薄荷清爽 唇膏唇膜唇部打底 </p>
+						<span>￥18.00</span>
+						<div class="com-nav4wrap-bottom">
+							<span>好评98%</span>
+							<a href="" class="fr">看相似</a>
+						</div>
+					</li>
+					<li class="com-nav4wrap">
+						<a href=""><img src="images/05-comnav/tui3.jpg" alt=""></a>
+						<p>忆江南 茶叶 绿茶 龙井茶碧螺春普洱茶 茗茶组合三罐装 275g</p>
+						<span>￥68900</span>
+						<div class="com-nav4wrap-bottom">
+							<span>好评90%</span>
+							<a href="" class="fr">看相似</a>
+						</div>
+					</li>
+					<li class="com-nav4wrap">
+						<a href=""><img src="images/05-comnav/tui4.jpg" alt=""></a>
+						<p>
+						泰国进口 休闲零食 小老板 烤海苔卷 脆紫菜卷 原味 32.4g/盒（新老包装随机发货）</p>
+						<span>￥14.80</span>
+						<div class="com-nav4wrap-bottom">
+							<span>好评98%</span>
+							<a href="" class="fr">看相似</a>
+						</div>
+					</li>					
+				</ul>
+		</div>
+		<!-- 京东移动端尾部 -->
+		<div class="jd-footer">
+			<div><a href="">点击高渐离继续</a></div>
+			<div>
+				<a href="">登录</a>
+				<a href="">注册</a>
+				<a href="">反馈</a>
+				<a href="">回到顶部</a>
+			</div>
+			<div>
+				<a href=""><i class="iconfont icon-kehuduan1"></i><span>客户端</span></a>
+				<a href=""><i class="iconfont icon-iconfonthongpingban"></i><span>触屏</span></a>
+				<a href=""><i class="iconfont icon-iconfontdiannaoban"></i><span>电脑版</span></a>
+
+			</div>
+			<div class="jiewei"><p>Copyright © 2004-2017 京东JD.com 版权所有</p></div>
+			<footer>
+				<div><a href=""><img src="images/10-footer/1.png" alt=""></a></div>
+				<div><a href=""><img src="images/10-footer/2.png" alt=""></a></div>
+				<div><a href=""><img src="images/10-footer/3.png" alt=""></a></div>
+				<div><a href=""><img src="images/10-footer/4.png" alt=""></a></div>
+				<div><a href=""><img src="images/10-footer/5.png" alt=""></a></div>
+			</footer>
+		</div>
+	</div>
+	<!-- 引入swiper的js文件 -->
+	<script src="js/swiper-3.4.2.min.js"></script>
+	<script>
+	var mySwiper = new Swiper('.swiper-container', {
+		autoplay: 2000,//可选选项，自动滑动
+		loop:true,//循环播放
+		pagination: '.swiper-pagination',
+	})
+	</script>
+	<script> 
+	  var mySwiper = new Swiper('.swiper-container-1',{
+	    direction : 'vertical',
+	    autoplay: 3000,//可选选项，自动滑动
+		loop:true,//循环播放
+	  })
+	</script>
+	<!-- 网格 -->
+	<script language="javascript"> 
+	  	var mySwiper = new Swiper('.swiper-container-3',{
+		slidesPerView : 3.4,
+		// slidesPerGroup :3,
+		centeredSlides : false,
+		autoplay: 3000,
+		// loop:true，
+		})
+	</script>
+	<script> 
+		var mySwiper = new Swiper('.swiper-container-4', {
+		autoplay: 3000,//可选选项，自动滑动
+		loop:true,
+		})
+	</script>
+
+</body>
+</html>

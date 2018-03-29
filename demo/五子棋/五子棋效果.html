@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>五子棋特效</title>
+	<style>
+		.title{
+			text-align: center;
+			font-size: 20px;
+			height: 40px;
+			line-height: 40px;
+		}
+		#wrap{
+			width: 600px;
+			margin: 50px auto;
+			padding: 15px;
+			background: url('http://pic20.photophoto.cn/20110904/0008020235260556_b.jpg') no-repeat center/cover;
+		}
+		#box{
+			position: relative;
+			width: 600px;
+			height: 480px;	
+			border: 1px solid #999;
+			cursor: pointer;
+		}
+		span.pan{
+			float: left;
+			width: 30px;
+			height: 30px;
+			border: 1px solid #999;
+			box-sizing: border-box;
+		}
+		span.qizhi{
+			position: absolute;
+			width: 24px;
+			height: 24px;
+			border-radius: 50%;
+		}
+		span.qizhi.hei{
+			background-color: #000;
+		}
+		span.qizhi.hui{
+			background-color: #ccc;
+		}
+	</style>
+</head>
+<body>
+	<p class="title">五子棋:黑手先行,横竖斜先行相连五子为胜</p>
+	<div id="wrap">
+		<div id="box"></div>
+	</div>
+</body>
+<script>
+	var box =document.getElementById('box');
+	var box_initX=box.offsetLeft;
+	var box_initY=box.offsetTop;
+	//创建五子棋地图
+	for(var i=0;i<320;i++){
+		var spano = document.createElement('span');
+		spano.className='pan';
+		box.appendChild(spano);
+	};
+	//创建棋子数组记录每个棋子的位置
+	var chessAll=[];
+	for(i=0;i<=20;i++){
+		chessAll[i]=[];
+		console.log(11111);
+		for(j=0;j<=16;j++){
+		 chessAll[i][j]=0;
+		}
+	};
+	console.log(chessAll);
+	var toogle = true;
+	box.addEventListener('click',draw);
+	function draw(e){
+		e||window.event;
+		var qizhi = document.createElement('span');
+		qizhi.className= 'qizhi';
+		
+		box.appendChild(qizhi);
+		//鼠标点击时，棋子中心的位置
+		var qizhi_left = e.clientX-box_initX-qizhi.offsetWidth/2;
+		var qizhi_top = e.clientY-box_initY-qizhi.offsetHeight/2;
+		console.log(qizhi_top)
+		//鼠标点击是，棋子应该落到棋盘格子中心的位置
+		qizhi.numx= Math.floor(qizhi_left/30)+1;
+		qizhi.numy= Math.floor(qizhi_top/30)+1;
+		console.log(qizhi.offsetWidth/2)
+		console.log(qizhi.numx,qizhi.numy);
+		//记录黑子和白子所在点，空白处才能落子
+		if(chessAll[qizhi.numx][qizhi.numy]==0){
+			qizhi.style.left = qizhi.numx*30-12+'px';
+			qizhi.style.top = qizhi.numy*30-12+'px';
+			chessAll[qizhi.numx][qizhi.numy]= toogle?1:2;
+			qizhi.className= toogle?'qizhi hei':'qizhi hui';	
+			toogle=!toogle;
+			setTimeout(victory,0)
+		}else{
+			alert('请重新落子')
+		}
+	}
+	//胜负算法实现
+	function victory(){
+		for(i=0;i<=20;i++){
+			for(j=0;j<=16;j++){
+			 if(chessAll[i][j]==1&&chessAll[i][j+1]==1&&chessAll[i][j+2]==1&&chessAll[i][j+3]==1&&chessAll[i][j+4]==1){
+			 	alert('恭喜黑方获得胜利')
+			 	window.location.href=window.location.href;
+			 }else if(chessAll[i][j]==1&&chessAll[i+1][j]==1&&chessAll[i+2][j]==1&&chessAll[i+3][j]==1&&chessAll[i+4][j]==1){
+			 	alert('恭喜黑方获得胜利')
+			 	window.location.href=window.location.href;
+			 }else if(chessAll[i][j]==1&&chessAll[i+1][j+1]==1&&chessAll[i+2][j+2]==1&&chessAll[i+3][j+3]==1&&chessAll[i+4][j+4]==1){
+			 	alert('恭喜黑方获得胜利')
+			 	window.location.href=window.location.href;
+			 }else if(chessAll[i][j]==1&&chessAll[i+1][j-1]==1&&chessAll[i+2][j-2]==1&&chessAll[i+3][j-3]==1&&chessAll[i+4][j-4]==1){
+			 	alert('恭喜黑方获得胜利')
+			 	window.location.href=window.location.href;
+			 }
+			 else if(chessAll[i][j]==2&&chessAll[i][j+1]==2&&chessAll[i][j+2]==2&&chessAll[i][j+3]==2&&chessAll[i][j+4]==2){
+			 	alert('恭喜白方获得胜利')
+			 	window.location.href=window.location.href;
+			 }else if(chessAll[i][j]==2&&chessAll[i+1][j]==2&&chessAll[i+2][j]==2&&chessAll[i+3][j]==2&&chessAll[i+4][j]==2){
+			 	alert('恭喜白方获得胜利')
+			 	window.location.href=window.location.href;
+			 }else if(chessAll[i][j]==2&&chessAll[i+1][j+1]==2&&chessAll[i+2][j+2]==2&&chessAll[i+3][j+3]==2&&chessAll[i+4][j+4]==2){
+			 	alert('恭喜白方获得胜利')
+			 	window.location.href=window.location.href;
+			 }
+			 else if(chessAll[i][j]==2&&chessAll[i+1][j-1]==2&&chessAll[i+2][j-2]==2&&chessAll[i+3][j-3]==2&&chessAll[i+4][j-4]==2){
+			 	alert('恭喜白方获得胜利')
+			 	window.location.href=window.location.href;
+			 }
+			}
+		}
+		
+	}
+	
+</script>
+
+</html>

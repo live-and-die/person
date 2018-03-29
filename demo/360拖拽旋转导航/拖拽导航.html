@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>360旋转导航</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0
+		}
+		ul{
+			position: relative;
+			width: 640px;
+			height: 400px;
+			border: 1px solid #ccc;
+			margin: 0 auto;
+
+		}
+		li{
+			float: left;
+			width: 200px;
+			height: 120px;
+			list-style: none;
+			margin: 10px 0 0 10px;
+		}
+		img{
+			width: 100%;
+			height: 100%;
+			border-radius: 5px;
+		}
+	</style>
+</head>
+<body>
+	<div id='box'>
+		<ul id="wrap">
+			<li><img src="images/1.jpg" alt=""></li>
+			<li><img src="images/2.jpg" alt=""></li>
+			<li><img src="images/3.jpg" alt=""></li>
+			<li><img src="images/4.jpg" alt=""></li>
+			<li><img src="images/5.jpg" alt=""></li>
+			<li><img src="images/6.jpg" alt=""></li>
+			<li><img src="images/7.jpg" alt=""></li>
+			<li><img src="images/8.jpg" alt=""></li>
+			<li><img src="images/9.jpg" alt=""></li>
+		</ul>
+	</div>
+</body>
+<script>
+	var wrap = document.getElementById('wrap');
+	var ali = document.querySelectorAll('li');
+	var lips = [];
+	var starX,starY,nowX,nowY,initX,initY,ele,nowele,move;
+	var target = false;
+	for(let i=0,len =ali.length; i<len; i++){
+		//获得元素到定位父级的值并且将其储存到数组中
+		//将浮动元素转化为定位元素
+		lips.push([ali[i].offsetLeft,ali[i].offsetTop]);
+		setTimeout(function(){
+
+			ali[i].style.position="absolute";
+			ali[i].style.left=lips[i][0]+'px';
+			ali[i].style.top=lips[i][1]+'px';
+			ali[i].style.margin=0
+		},0)		
+	}
+	//当鼠标拖动时与其鼠标所在的图片position互换
+	wrap.addEventListener('mousedown',drag);
+	document.addEventListener('mousemove',drag);
+	document.addEventListener('mouseup',drag);
+	//定义拖拽事件
+	function drag(e){
+		e||window.event;
+		e.preventDefault();
+		console.log(e.type);
+		switch(e.type)
+		{
+			case 'mousedown': 
+			ele=e.target.parentNode;
+			ele.style.zIndex=1;
+			console.log(ele);
+			starX = ele.offsetLeft;
+			starY = ele.offsetTop;
+			initX = e.clientX;
+			initY = e.clientY;
+			target = true;
+			console.log(initY)
+			break;
+			case 'mousemove': 			
+			if(target){
+				nowX = e.clientX-initX+starX;
+				nowY = e.clientY-initY+starY;
+				console.log(nowX)
+				ele.style.left = nowX+'px';
+				ele.style.top = nowY+'px';
+				for(var j=0,len=ali.length;j<len;j++){
+					ali[j].toogle=true;
+				if(//碰撞检测
+					ele!=ali[j]&&e.clientX-wrap.offsetLeft>ali[j].offsetLeft
+					&&e.clientX-wrap.offsetLeft<ali[j].offsetLeft+201
+					&&e.clientY-wrap.offsetTop>ali[j].offsetTop
+					&&e.clientY-wrap.offsetTop<ali[j].offsetTop+121
+					){
+					ali[j].style.transform='scale(1.02)';
+				//给这个碰撞的时候的元素加个属性用来判断是否碰撞中
+					nowele=	ali[j];
+					nowele.toogle = false ;			
+				}
+				else{
+					
+					ali[j].style.transform='scale(1)';	
+				}				
+			}
+		}		
+			break;
+			case 'mouseup': 
+			console.log('鼠标松开');
+			target = false;
+			ele.style.zIndex='';
+			if(nowele){
+				if(nowele.toogle){
+				ele.style.left = starX+'px';
+				ele.style.top = starY+'px';
+				}else{
+					nowele.style.transform='scale(1)';
+					console.log('鼠标移开时候位置互换');
+					ele.style.left = nowele.offsetLeft+'px';
+					ele.style.top = nowele.offsetTop+'px';
+					nowele.style.left =starX+'px';
+					nowele.style.top = starY+'px';
+					nowele=null;
+				}
+			}
+			else{
+				ele.style.left = starX+'px';
+				ele.style.top = starY+'px';
+			}				
+			ele='';	
+			break;
+		}
+		return false;
+	}
+</script>
+</html>

@@ -1,0 +1,482 @@
+@charset "utf-8";
+@rem:64rem;
+.hammer{
+	width: 640/@rem;
+	background-color: #eee;
+}
+
+.hammer-header{
+	position: fixed;
+	z-index: 999;
+	top: 0px;
+	left: 0px;
+	height: 50px;
+	width: 100%;
+	background-color: #000;
+}
+.hammer-header:after{
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.head-navbox{
+	float: left;
+	display: block;
+	width: 60px;
+	height: 50px;
+	margin: 0px 5px;
+	background: url("../images/00-header/2.png") no-repeat  0px 0px;
+	background-size: 50px 350px;
+}
+.hammer-icon{
+	display: block;
+	width: 50px;
+	height: 50px;
+	margin: 0 auto;
+	background: url("../images/00-header/1.png") no-repeat  0px 0px;
+	background-size: 50px 350px;
+}
+.hammer-body .lunbo{
+	background-color: #fff;
+	box-shadow: 0 0 40px 10px #ccc; 
+}
+.hammer-body .lunbo-box{
+	overflow: hidden;
+	width: 598/@rem;
+	margin: 70px auto 20px;
+	border-radius: 15px;
+
+}
+.hammer-body .swiper-container{
+	width: 598/@rem;
+	height: 248/@rem;
+
+}
+.hammer-body .swiper-container .swiper-wrapper .swiper-slide {
+	width: 100%;
+	height: 100%;
+}
+.swiper-wrapper .swiper-slide a{
+	display: block;
+}
+.swiper-wrapper .swiper-slide img{
+	width: 100%;
+	height: 100%;
+}
+.hammer-body .swiper-container .swiper-pagination .swiper-pagination-bullet-active{
+	background: #fff;
+}
+.com-nav01{
+	display: flex;
+	width: 600/@rem;
+	margin: 20px auto;
+	padding: 20px 0px;
+}
+.com-nav01 a{
+	display: block;
+	flex: 1;
+	text-align: center;
+}
+.com-nav01 a img{
+	width: 42/@rem;
+	height: 42/@rem;
+}
+.com-nav01 a p{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	height: 60/@rem;
+	line-height: 60/@rem;
+}
+// 热门
+.remen{
+	background-color: #fff;
+}
+.remen-title{
+
+}
+.remen-title h2{
+	width: 597/@rem;
+	height: 60/@rem;
+	line-height: 60/@rem;
+	margin: auto;
+}
+.remen-title h2 a{
+	font-size: 14/@rem;
+	float: right;
+}
+
+.remen-body{
+	width: 100%;
+	overflow: hidden;
+}
+.swiper-container-1{
+	width: 100%;
+}
+.swiper-container-1 .swiper-slide{
+	width: 215/@rem;
+	height: 357/@rem;
+	
+}
+.swiper-container-1 .swiper-slide .remen-text{
+	padding: 10/@rem 18/@rem 30/@rem;
+}
+.swiper-container-1 .swiper-slide b{
+	display: block;
+	font-size: 24/@rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.swiper-container-1 .swiper-slide p{
+	font-size: 14/@rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin: 10/@rem 0px;
+}
+.swiper-container-1 .swiper-slide p + i{
+	font-size: 8/@rem;
+	color: red;	
+}
+.swiper-container-1 .swiper-slide i+span{
+	font-size: 16/@rem;
+	font-weight: bold;
+	color: red;
+}
+.swiper-container-1 .swiper-slide del {
+	text-decoration: line-through;
+
+}
+.swiper-container-1 .swiper-slide del i{
+	display: inline-block;
+	font-size: 8/@rem;
+}
+.swiper-container-1 .swiper-slide del span{
+	font-size: 10/@rem;
+	color: #666;
+}
+
+
+// 网格滑动2
+.com-bannar {
+	width: 100%;
+	padding: 20/@rem 0;
+	margin: 15px 0;
+	background-color: #fff;
+	overflow: hidden;
+}
+.com-bannar .swiper-container-2{
+
+}
+.com-bannar .swiper-container-2 .swiper-slide{
+	width: 470/@rem;
+	height: 150/@rem;		
+}
+.com-bannar .swiper-container-2 .swiper-slide a{
+	display: block;
+	width: 100%;
+	height:100%;
+}
+// 热销机型
+.rexiao{
+	overflow: hidden;
+	width: 100%;
+	background-color: #fff;
+}
+.rexiao h2{
+	font-size: 34/@rem;
+	height: 70/@rem;
+	line-height: 70/@rem;
+	text-indent: 20/@rem;
+	color: #666;
+}
+ .swiper-container-3 .swiper-slide div{
+	text-align: center;
+	padding-bottom: 60/@rem;
+}
+.swiper-container-3 .swiper-slide div b{
+	font-size: 24/@rem;
+	line-height:40/@rem;
+	height: 40/@rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.swiper-container-3 .swiper-slide div p{
+	font-size: 16/@rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin: 10px 0;
+}
+.swiper-container-3 .swiper-slide div i{
+	font-size: 14/@rem;
+	overflow: hidden;
+	color: red;
+}
+.swiper-container-3 .swiper-slide div span{
+	font-size: 18/@rem;
+	font-weight: bold;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: red;
+}
+.rexiao-bottom{
+	display: flex;
+	flex-wrap: wrap;
+	overflow: hidden;
+}
+.rexiao-bottom a{
+	position: relative;
+	right: -1px;
+	display: flex;
+	width: 318/@rem;
+	height: 106/@rem;
+	border-top: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	align-items: center;
+}
+.rexiao-bottom a img{
+	width: 64/@rem;
+	height: 64/@rem;
+	margin: 0 15px;
+
+}
+.rexiao-bottom a p{
+	flex: 1;
+	font-size: 22px;
+	font-weight: bold;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.rexiao-bottom a i{
+	flex: none;
+	margin-right: 20/@rem;
+	font-size: 22/@rem;
+	font-weight: bold;	
+}
+
+.com-bannar1{
+	padding: 20px;
+	display: flex;	
+	justify-content: space-between;
+	margin: 15px 0;
+	background-color: #fff;
+
+}
+.com-bannar1 div:nth-child(1){
+	width: 290px
+
+}
+.com-bannar1 div:nth-child(1) a{
+	display: block;
+	width: 290/@rem;
+	height: 152/@rem;
+	margin-bottom: 20/@rem;
+	box-shadow: 0 2px 15px 1px #ccc;
+}
+.com-bannar1 div a img{
+	width: 100%;
+	height: 100%;
+}
+.com-bannar1 div:nth-child(2) a{
+	display: block;
+	width: 290/@rem;
+	height: 496/@rem;
+	box-shadow: 0 2px 15px 1px #ccc;
+}
+
+// 热销坚果
+
+.com-rexiao{
+	padding: 15/@rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+
+}
+.rexiao-box a{
+	display:block;
+	height: 290/@rem;
+	width: 290/@rem;
+}
+.rexiao-box a img{
+	width: 100%;
+	height: 100%;
+}
+.rexiao-box div{
+	width: 270/@rem;
+	height: 140/@rem;
+	padding: 15/@rem 0px 30/@rem 20/@rem;
+
+}
+.rexiao-box div b{
+	font-size: 24/@rem;
+	line-height:40/@rem;
+	height: 40/@rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.rexiao-box div p{
+	font-size: 16/@rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin: 10/@rem 0;
+}
+.rexiao-box div i{
+	font-size: 14/@rem;
+	overflow: hidden;
+	color: red;
+}
+.rexiao-box div span{
+	font-size: 18/@rem;
+	font-weight: bold;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: red;
+}
+// 配件
+.peijian{
+	background: #fff;
+	margin: 20px 0;
+}
+.peijian-title{
+	padding: 20/@rem;
+	border-bottom: 1px solid #ccc;
+}
+.peijian-title h2{
+	font-size: 26/@rem;
+	color: #666;
+}
+.peijian-title h2 i{
+	float: right;
+	font-weight: bold;
+
+}
+
+.peijian-body{
+	
+	padding: 20/@rem;
+	border-bottom: 1px solid #ccc;
+}
+.peijian-body  .p-img{
+	width: 215/@rem;
+	height: 215/@rem;
+}
+.peijian-body .p-img a{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.peijian-body .p-img a img{
+	width: 100%;
+	height: 100%;
+}
+.p-text{
+	width: 215/@rem;
+	height: 195/@rem;
+	padding-top: 20/@rem;
+	margin-left: 50/@rem;
+}
+.p-text b{
+	color: #000;
+	font-size: 24/@rem;
+	line-height:40/@rem;
+	height: 40/@rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+}
+.p-text p{
+	font-size: 16/@rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin: 10/@rem 0;
+}
+
+.p-text div a{
+	float: left;
+	width: 34/@rem;
+	height: 20/@rem;
+	border: 1px solid blue;
+	background-color: #E5EFFF;
+	border-radius: 5/@rem;
+	font-size: 12/@rem !important;
+	text-align: center;
+	margin-right: 10/@rem;
+}
+.peijian-page{
+	margin: 20/@rem 0;
+}
+.peijian-page span{
+	float: left;
+	width: 10/@rem;
+	height: 10/@rem;
+	margin-right: 10/@rem;
+	border-radius: 50%;
+	background-color: #666;
+}
+.p-text  span{
+	display: flex;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.p-text>span b{
+	line-height: 40/@rem;
+	color: red;
+	flex: 1;
+}
+.p-text>span del{
+
+	overflow: hidden;
+	display: flex;
+	flex: 1;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	line-height: 40/@rem;
+	font-size: 12/@rem;
+}
+// 衣服
+.yifu{
+	padding-bottom: 60px;
+}
+
+// 尾部导航
+.hammer-foot .foot-nav{
+	position: fixed;
+	width: 100%;
+	left: 0px;
+	bottom: 0px;
+	display: flex;
+	height: 50px;
+	border-top: 1px solid #ccc;
+	background-color: #fff;
+	z-index: 999;
+}
+.hammer-foot .foot-nav a{
+	display: block;
+	flex: 1;
+	text-align: center;
+}
+.hammer-foot .foot-nav a img{
+	width: 27/@rem;
+	height: 27/@rem;
+}
+.hammer-foot .foot-nav a h4{
+	font-size: 12px;
+	color: #666;
+}
+
+
+
+

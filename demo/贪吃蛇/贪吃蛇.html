@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>贪吃蛇</title>
+</head>
+<style>
+    #container{
+        position: relative;
+        width: 600px;
+        height: 420px;
+        font-size: 0px;
+        border: 1px solid #ccc;
+        background-color: #ffa5a5
+    }
+    span{
+        display: inline-block;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+    }
+    .snake{
+        background-color: red;
+        color: #000;
+        text-align: center;
+        line-height: 30px;
+        position: absolute;
+        z-index: 2; 
+        font-size: 20px;      
+    }
+    .head{
+        background-color: green;
+        position: absolute; 
+    }
+    .food{
+        position: absolute;
+        border: none;
+        background: url(images/1.png) no-repeat center/cover;
+        animation: beat 0.7s ease 0s infinite normal;
+
+    }
+    @keyframes beat{
+            0%{
+                transform:scale(1);
+            }
+             25%{
+                transform:scale(1.3);
+            }
+             50%{
+                transform:scale(1);
+            }
+             75%{
+                transform:scale(0.7);
+            }
+            100%{
+                transform:scale(1);
+            }
+
+</style>
+<body>
+    <div id="container"></div>
+
+</body>
+<script>
+    var box={width:30,height:30};//每块方格的高度
+    var DIR={Dir_right:0,Dir_left:1,Dir_top:2,Dir_bottom:3}
+    var dir= DIR.Dir_bottom;
+    var food=null;
+    var newTop;
+    var newLeft;
+    var word = "桃花坞里桃花庵，桃花庵下桃花仙。桃花仙人种桃树，又折花枝当酒钱";
+        
+    var snake=[];
+    initMap();
+    createSnake();
+    showFood();
+    var timer = setInterval(snakeMove,300); 
+    document.onkeydown=function(e){
+        e=e||window.event;
+        // if(snake[snake.length-2].offsetLeft==newLeft&&snake[snake.length-2].offsetTop==newTop){
+        //     switch(e.keyCode){
+        //     case 37: dir=DIR.Dir_right;break;
+        //     case 38: dir=DIR.Dir_bottom;break;
+        //     case 39: dir=DIR.Dir_left;break;
+        //     case 40: dir=DIR.Dir_top;break;
+        //     }
+        // }
+        // else{
+            if(dir == DIR.Dir_right && e.keyCode == 37){
+                return;
+            }
+            if(dir == DIR.Dir_left && e.keyCode == 39){
+                return;
+            }
+            if(dir == DIR.Dir_top && e.keyCode == 40){
+                return;
+            }
+            if(dir == DIR.Dir_bottom && e.keyCode == 38){
+                return;
+            }
+            switch(e.keyCode){
+            case 37: dir=DIR.Dir_left;break;
+            case 38: dir=DIR.Dir_top;break;
+            case 39: dir=DIR.Dir_right;break;
+            case 40: dir=DIR.Dir_bottom;break;
+            }
+        // }
+        // console.log(e.keyCode);
+        
+    }
+
+    //地图的初始化
+    function initMap(){
+        var con = document.getElementById('container');
+        var row = Math.floor(con.offsetWidth/box.width);
+        var col = Math.floor(con.offsetHeight/box.height);
+        var num = row*col;
+        console.log(col);
+        var newSpan = null;
+        for(i=0;i<num;i++){
+            newSpan= document.createElement('span');
+            newSpan.style.width=box.width+'px';
+            newSpan.style.height=box.height+"px";
+            con.appendChild(newSpan);
+        }
+    }
+    //蛇的初始化
+    function createSnake(){
+        var con = document.getElementById('container');
+        var snakeStart = null;
+        for(i=1;i<=5;i++){
+            var snakeStart = document.createElement('span');
+            snakeStart.style.width=box.width+'px';
+            snakeStart.style.height=box.height+'px';
+            snakeStart.style.left=(i-1)*box.width+'px';
+            snakeStart.style.top=0;
+            snakeStart.className='snake';
+            con.appendChild(snakeStart);
+            snake.push(snakeStart);
+        }
+    }
+    //蛇头的移动
+    function snakeMove(){
+        var con = document.getElementById('container');
+        var head = snake[snake.length-1];
+        newTop=head.offsetTop;
+        newLeft=head.offsetLeft;
+        switch(dir){
+            case DIR.Dir_left:newLeft-=box.width;break;
+            case DIR.Dir_right:newLeft+=box.width;break;
+            case DIR.Dir_top:newTop-=box.height;break;
+            case DIR.Dir_bottom:newTop+=box.height;break;
+            default:break;
+        }
+        //如果超出边界计算下个坐标位置
+        if(newLeft>con.offsetWidth-2-1){
+            alert('gameover');
+            clearInterval(timer);
+            return false;
+            
+
+            // newLeft=0;
+        }
+        if(newLeft<0){
+            alert('gameover');
+            clearInterval(timer);
+            return false;
+            // newLeft=con.offsetWidth-2-box.width;
+        }
+        if(newTop>con.offsetHeight-2-1){
+            alert('gameover');
+            clearInterval(timer);
+            return false;
+            // newTop=0;
+        }
+        if(newTop<0){
+            alert('gameover');
+            clearInterval(timer);
+            return false;
+            // newTop=con.offsetHeight-2-box.height;
+        }
+        //判断新蛇头的位置是不是在蛇身体里面  
+        for(var i=0;i<snake.length-1;i++){  
+             if(snake[i].offsetLeft==newLeft&&snake[i].offsetTop==newTop){ 
+                //去掉蛇头在蛇脖子的情况
+                //if(snake[snake.length-2].offsetLeft==newLeft&&snake[snake.length-2].offsetTop==newTop){
+                   // return 666;
+                    // switch(dir){
+                    // case DIR.Dir_left:newLeft=newLeft+2*box.width;break;
+                    // case DIR.Dir_right:newLeft=newLeft-2*box.width;break;
+                    // case DIR.Dir_top:newTop=newTop+2*box.height;break;
+                    // case DIR.Dir_bottom:newTop=newTop-2*box.height;break;
+                    // default:break;
+                    // }
+                //} else{
+                    alert("Game over！！");
+                    //刷新页面  
+                    window.location.href=window.location.href;
+                //}
+                
+            }  
+         } 
+
+        //如果吃到食物
+        if(newTop==food.offsetTop&&newLeft==food.offsetLeft){
+            food.className='snake';
+            snake.push(food);
+            showFood();
+            // return;
+        }
+        //如果没有吃到，除了蛇头外身体移动
+        for(var i=0; i<snake.length-1;i++){
+            snake[i].style.top=snake[i+1].offsetTop+'px';
+            snake[i].style.left=snake[i+1].offsetLeft+'px';
+            snake[i].className = "snake";
+            snake[i].innerHTML=word.charAt(i);
+           
+           
+        }
+        head.style.left=newLeft+'px';
+        head.style.top = newTop+'px';
+        head.className = 'head';
+    }
+    //生成食物
+    function showFood(){
+        var con =document.getElementById('container');
+        food = document.createElement('span');
+        food.style.width=box.width+'px';
+        food.style.height=box.height+'px';
+        food.className='food';
+        var left;
+        var top;
+        //判断，若产生的食物在蛇的身体当中，则不停的循环直到食物不在蛇身体中
+        do{
+            left=Math.floor((con.offsetWidth-2)/box.width*Math.random())*box.width;
+            top=Math.floor((con.offsetHeight-2)/box.height*Math.random())*box.height;
+            console.log(box.height);
+        }
+        while(isSnakeBody());
+        food.style.left=left+'px';
+        food.style.top=top+'px';
+        con.appendChild(food);
+    }
+    //判断生成的食物坐标是否在蛇的身体当中
+    function isSnakeBody(left,top){
+        for(i=0;i<length;i++){
+            if(snake[i].offsetTop==top&&snake[i].offsetLeft==left){
+                return true;
+            }
+        }
+    }
+</script>
+
+</html>

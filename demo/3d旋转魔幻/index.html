@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3d旋转魔幻排序</title>
+	<style>
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
+		body,html{
+	    overflow: hidden;
+	    width: 100%;
+	    height: 100%;
+		}
+		#box{
+			position: relative;
+			width: 200%;
+			height: 100%;
+			left:0%;
+		}
+		#wrap{
+			float: left;
+			width: 50%;
+			height: 100%;
+			background: #023b3b url('images/bg.png') center center;
+			/*加上景深*/
+			perspective: 800px;
+		}
+		ul{
+			position: absolute;
+			z-index: 2;
+		    top: 50%;
+		    left: 50%;
+			width: 120px;
+    		height: 160px;
+    		border: 1px solid red;
+    		margin-top: -80px;
+    		margin-left: -60px;
+    		transform: translateZ(-2800px) rotateX(0deg) rotateY(0deg);
+    		/*构建3d场景*/
+    		transform-style: preserve-3d;
+		}
+		.card{
+			position: absolute;
+			top: 0px;
+			left:0px;
+			list-style: none;
+			width: 100%;
+			height: 100%;
+			background: rgba(0,127,127,0.5);
+			border: 1px solid rgba(127,255,255,0.25);
+			box-shadow: 0 0 12px rgba(0,255,255,0.5);
+			line-height: 160px;
+		    text-align: center;
+		    color: #fff;
+		    font-weight: bold;
+		    cursor: default;
+		    transition: 3s ease;
+		}
+		p.button{
+			position: absolute;
+			left: 3%;
+			bottom: 2%;			
+		}
+		p.button span{
+			float: left;
+			width: 54px;
+			height: 30px;
+			line-height: 30px;
+			text-align: center;
+			font-weight: bold;
+			
+			border: 2px solid rgba(127,255,255,0.25);
+			
+			border-radius: 5px;
+			color: #ccc;
+			margin: 5px;
+			cursor: pointer;
+		}
+		p.button span:hover{
+			background: rgba(0,127,127,0.5);
+			box-shadow: 0 0 12px rgba(0,255,255,0.5);
+		}
+		.alert,.alert .title,.alert .picture,.alert .auther,.alert .info,#back{
+			position: absolute;
+			color: #fff;
+			font-size: 20px;
+			font-weight: bold;
+			text-align: center;
+			background: rgba(0,127,127,0.5);
+			border: 1px solid rgba(127,255,255,0.25);
+			box-shadow: 0 0 12px rgba(0,255,255,0.5);
+			border-radius: 1%;
+		}
+		.alert{
+			display: none;
+			z-index: 1;
+			width: 40%;
+			height: 80%;
+			left: 5%;
+			top: 10%;
+			transform: scale(0.00001);
+			opacity: 0;
+			transition: 2s;
+		}
+		.alert.after{
+			transform: scale(1);
+			opacity: 1;
+		}
+		.alert .title{
+			width: 50%;
+			padding: 2%;
+			left: 25%;
+			top: 5%;
+		}
+		.alert .picture{
+			width: 40%;
+			height: 56%;
+			left: 5%;
+			top: 40%;
+			border-radius: 5%;
+		}
+		.alert .picture img{
+			width: 100%;
+			height: 100%;
+			border-radius: 5%;
+		}
+		.alert .auther{
+			width: 33%;
+			padding: 2%;
+			right: 5%;
+			top: 40%;
+		}
+		.alert .info{
+			width: 35%;
+			padding: 1%;
+			height: 30%;
+			right: 5%;
+			top: 60%;
+		}
+		#back{
+			right: -130px;
+			bottom: 20px;
+			cursor: pointer;
+		}
+		iframe{	
+			float: left;		
+			width: 50%;
+			height: 100%;		
+			transition:2s;
+		}
+	</style>
+</head>
+<body>
+	<div id='box'>
+		<div id="wrap">
+			<ul></ul>
+			<p class="button">
+				<span>Table</span>
+				<span>Sphere</span>
+				<span>Helix</span>
+				<span>Grid</span>
+			</p>
+			<p id="back">back</p>
+		</div>
+		<div class="alert">
+			<div class="title"><span>课题:白狗非狗</span></div>
+			<div class="picture"><img src="images/dogdemo.jpg" alt=""></div>
+			<div class="auther"><span>作者:高渐离</span></div>
+			<div class="info">
+				<span>描述：大家都知道狗不一定是白的，可谁知道白狗也非狗呢</span>
+			</div>
+
+		</div>
+		
+		<iframe src="src/3D Drag/index.html" frameborder="0">e</iframe>
+	</div>
+</body>
+<script>
+	var box = document.getElementById('box');
+	var ul = document.querySelector('ul');
+	var lio = document.getElementsByTagName('li');
+	var button =document.getElementsByClassName('button')[0];
+	var btn=button.getElementsByTagName('span');
+	var length = 5*5*5;
+	var alerto =document.getElementsByClassName('alert')[0];
+	var iframe =document.getElementsByTagName('iframe')[0];
+	var back = document.getElementById('back');
+	for(i=0;i<length; i++){
+		var ali = document.createElement('li');
+		// 获得图片的初始位置坐标
+		ali._x=(i%5);
+		ali._y=Math.floor((i%25)/5);
+		ali._z=Math.floor(i/25);
+		ali.className='card';
+		ali.innerHTML = "x:"+ali._x+" y:"+ali._y+" z:"+ali._z;
+		var start_x =Math.random()*6000-3000;
+		var start_y =Math.random()*6000-3000;
+		var start_z =Math.random()*6000-3000;
+		ali.style.transform = "translate3D("+start_x+"px,"+start_y+"px,"+start_z+"px)";
+		ul.appendChild(ali);	
+	}
+	//给个延迟执行Grid布局
+	setTimeout(Grid,300);
+	// 鼠标事件
+	(function(){
+		var Rx = 0,
+			Ry = 0,
+			Rz = -2800,
+			move_x,
+			move_y,
+			now_x=0,
+			now_y=0,
+			timeMouse;
+			//鼠标点压后的事件
+			document.onmousedown=function(e){
+				if(timeMouse){
+					cancelAnimationFrame(timeMouse);
+				}				
+				e=e||window.event;
+				e.preventDefault?e.preventDefault():e.returnValue = false;
+				//阻止默认；
+				var init_x=e.clientX,
+					init_y=e.clientY,
+					last_x=init_x,
+					last_y=init_y;
+				//鼠标移动事件
+				document.onmousemove=function(e){
+					e=e||window.event;
+					    move_x = e.clientX-last_x;
+					    console.log(move_x);
+						move_y = e.clientY-last_y;
+						console.log(move_y);
+						now_y +=move_x*0.15;
+						now_x -=move_y*0.15;
+						last_x=e.clientX;
+						last_y=e.clientY;
+						console.log(now_x,now_y);
+					ul.style.transform = "translateZ("+Rz+"px) rotateX("+now_x+"deg) rotateY("+now_y+"deg)";
+						
+				}
+				//鼠标松开事件
+				document.onmouseup=function(){
+					document.onmousemove=null;
+					document.onmouseup=null;
+					(function guanxing(){
+						move_x=move_x*0.9;
+						move_y=move_y*0.9;
+						now_y +=move_x*0.15;
+						now_x -=move_y*0.15;
+						ul.style.transform = "translateZ("+Rz+"px) rotateX("+now_x+"deg) rotateY("+now_y+"deg)";
+						if ( Math.abs(move_x) < 0.1 && Math.abs(move_y) < 0.1 )return;
+						 timeMouse=requestAnimationFrame(guanxing);
+					})();
+					Rx = now_x;
+					Ry = now_y;
+				}
+			}
+			//火狐的滚轮事件是DOMMouseScroll;
+			//鼠标的滚轮事件(为了保证滚轮事件的兼容性最好用监听)
+			!(function(fn){
+				if(document.onmousewheel===undefined){
+					document.addEventListener('DOMMouseScroll',function(e){
+						var d =e.detail/3;
+						fn().call(this,d);
+					},false)
+				}
+				else{document.onmousewheel=function(e){
+						var d = e.wheelDelta/120;					
+						fn.call(this,d);
+					}
+				}
+			})(
+				function fn(d){
+					console.log(this); 
+					Rz+=d*100;
+					console.log(Rz);
+					ul.style.transform = "translateZ("+Rz+"px) rotateX("+now_x+"deg) rotateY("+now_y+"deg)";
+				}
+			);
+	})();
+	//下方按钮的点击事件切换卡片的布局
+	for(i=0;i<btn.length;i++){
+		btn[i].index = i;
+		btn[i].onclick=function(){
+			[Table,Sphere,Helix,Grid][this.index]();			
+		}
+	}	
+	//Grid布局
+	function Grid(){
+		var grid_x = 350;
+		var grid_y = 350;
+		var grid_z = 600;
+		for(i=0;i<5*5*5; i++){
+			var x =(lio[i]._x-2)*grid_x;
+			var y =(lio[i]._y-2)*grid_y;
+			var z =(lio[i]._z-2)*grid_z;
+			lio[i].style.transform = "translate3D("+x+"px,"+y+"px,"+z+"px)";
+		}
+	}
+	//螺旋布局
+	function Helix(){
+		// 设置层数为四
+		var cell = 4;
+		//以中间数为基准
+		var mid = Math.floor(length/2);
+		// 螺旋的半径
+		var z_roll = 1000;
+		var number = (length/4);
+		var deg = 360/number;
+		for(i=0;i<length;i++){
+			lio[i].style.transform = " rotateY("+(i%number)*deg+"deg) translateZ("+z_roll+"px) translateY("+(i-mid)*10+"px)";
+		}
+	}
+	//球状布局
+	function Sphere(){
+		//设置球是由几层组成
+		var cell = 13;
+		var degX = 180/(cell-1);
+		//设置每层球的数量
+		var numberALL = [1,3,6,11,12,16,21,16,14,12,7,5,1];
+		//使用for循环来求出当前li是第几层第几个
+		
+		for( i = 0;i<length;i++){
+			var cardhad=0,cardcell=0,cardnum=0;
+			for( j =0;j<cell;j++){
+				cardhad+=numberALL[j];				
+				if(cardhad>i){
+					cardcell = j;
+					cardnum=numberALL[j]-(cardhad-i);
+					console.log(j);
+					break;
+					// console.log(cardcell);
+					// console.log(cardnum);
+				}
+			}
+			console.log(cardhad);
+			var degY = 360/numberALL[cardcell];
+			lio[i].innerHTML="第"+cardcell+"层第"+cardnum+"个"
+			lio[i].style.transform = " rotateY("+(cardnum+1.3)*degY+"deg) rotateX("+(90-cardcell*degX)+"deg) translateZ("+800+"px)";
+		}
+	}
+	//元素周期表的布局
+	function Table(){
+		//定义前面18个的坐标
+		//求出整个图像的中心点坐标
+		var midX = (18-1)/2;
+		var midY = (9-1)/2;
+		var _s = 200;
+		var arr=[
+			{_x:0,_y:0},
+			{_x:17,_y:0},
+			{_x:0,_y:1},
+			{_x:1,_y:1},
+			{_x:12,_y:1},
+			{_x:13,_y:1},
+			{_x:14,_y:1},
+			{_x:15,_y:1},
+			{_x:16,_y:1},
+			{_x:17,_y:1},
+			{_x:0,_y:2},
+			{_x:1,_y:2},
+			{_x:12,_y:2},
+			{_x:13,_y:2},
+			{_x:14,_y:2},
+			{_x:15,_y:2},
+			{_x:16,_y:2},
+			{_x:17,_y:2}
+		]
+		for(i=0;i<length;i++){
+			if(i<18){
+				var x = arr[i]._x-midX;
+				var y = arr[i]._y-midY;
+				console.log(x,y)
+
+			}else{
+				var x = i%18-midX;
+				var y =Math.floor(i/18)+2-midY;
+			}
+			lio[i].style.transform="translate3D("+x*_s+"px,"+y*_s+"px,0px)";
+		}
+	}
+	//圆锥布局
+	//给每个卡片点击事件让其具备弹出框	
+	ul.onclick=function(e){
+		console.log(alerto.style.display);
+		if(alerto.style.display==='block'){
+			return 666;
+		}else{
+		console.log('弹窗事件');
+		alerto.style.display='block';
+		setTimeout(function(){
+			alerto.style.transform="rotateY(0deg) scale(1)";
+			alerto.style.opacity = 1},0);
+		e.cancelBubble = true;
+		}
+	}
+	// 点击document，弹窗旋转变小消失
+	document.onclick=function(e){
+		if (alerto.style.display==='block'){
+			alerto.style.transform="rotateY(180deg) scale(0.001)";
+			alerto.style.opacity = 0;
+			console.log("弹窗变小事件");
+			setTimeout(function(){alerto.style.display="none"},2000);			
+		}
+
+	}
+	//给弹窗一个点击事件，让其进入一个demo演示
+	alerto.onclick=function(e){
+		console.log("弹窗木马")
+		var move_right = 0;
+		var time = setInterval(function(){
+			move_right--;
+			if(move_right<=-100){
+				clearInterval(time);
+		}
+			box.style.left=move_right+"%";
+		},20);		
+		e.cancelBubble = true;
+	}
+	back.onclick=function(e){
+		console.log("弹窗木马")
+		var move_right = -100;
+		var time = setInterval(function(){
+			move_right++;
+			if(move_right>=0){
+				clearInterval(time);
+		}
+			box.style.left=move_right+"%";
+		},20);		
+		e.cancelBubble = true;
+	}
+</script>
+</html>

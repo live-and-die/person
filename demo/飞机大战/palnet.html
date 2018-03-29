@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>打飞机2018.3版</title>
+	<style>
+		body{
+			overflow: hidden;
+		}
+		#box{
+			position: relative;
+			overflow: hidden;
+			width: 510px;
+			height: 610px;
+			margin: 0 auto;
+			
+		}
+		#map{
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			width: 510px;
+			height: 610px;
+			background: url('img/bg_1.jpg');
+
+		}
+		#level{
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			width: 510px;
+			height: 610px;
+			cursor: pointer;			
+		}
+		#level h2{
+			color: #fff;
+			font-size: 50px;
+			text-align: center;
+			margin:100px auto 160px;
+		}
+		#level p{
+			width: 200px;
+			height: 35px;
+			line-height: 35px;
+			background-color: #fff;
+			font-size: 20px;
+			font-weight: bolder;
+			margin: 30px auto;
+			text-align: center;
+		}
+		#level p:hover{
+			background-color: pink;
+		}
+		#map .plane{
+			position: absolute;
+			
+
+		}
+		#map .zidan{
+			position: absolute;
+		}
+		#map .enemy{
+			position: absolute;
+		}
+		#map .boom{
+			position: absolute;
+			animation: move1 1s 1;
+			animation-fill-mode: forwards;
+		}
+		#map .boom2{
+			position: absolute;
+			animation: move 1s 2;
+			animation-fill-mode: forwards;
+		}
+		#score {
+			position: absolute;
+			height: 50px;
+			line-height: 50px;
+			font-size: 15px;
+			color: yellow;
+			margin-left: 20px;
+		}
+		@keyframes move1{
+			from{
+				opacity: 1;
+			}to{
+				opacity: 0;
+			}
+		}
+		@keyframes move {
+			0%{
+				opacity: 1;
+			}
+			25%{
+				opacity: 0;
+			}
+			50%{
+				opacity: 1;
+			}
+			75%{
+				opacity: 0;
+			}
+			100%{
+				opacity: 1;
+			}
+		}
+		#final{
+			display: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+		#final p{
+			margin: 50px auto;
+			width: 300px;
+			height: 50px;
+			font-size: 20px;
+			color: #fff;
+			line-height: 50px;
+			text-align: center;	
+		}
+		#final p:nth-of-type(1){
+			margin-top: 60px;
+		}
+		#final p:nth-of-type(2){
+			color: yellow;
+			font-size: 30px;
+			background-color: rgba(0,0,0,0);
+		}
+		#final p:nth-of-type(4){
+			margin-top: 150px;
+			font-family: "楷体";
+			border-radius: 10px;
+			background-color: rgba(0,0,0,0.5);
+		}
+		#final p:nth-of-type(4):hover{
+			color: green;
+			background-color: rgba(0,0,0,0.3);
+		}
+		#final p span{
+			display: block;
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div id="map">
+			<div id='score'>游戏时间：<span>0分0秒</span></div>
+		</div>
+		<div id="level">
+			<h2>打飞机2018.3版</h2>
+			<p>简单</p>
+			<p>中等</p>
+			<p>困难</p>
+			<p style="color: red">变态级别</p>
+		</div>
+		<div id="final">
+			<p>游戏得分<span>0</span></p>
+			<p>GAMEOVER </p>
+			<p>恭喜获得称号<span>啊哈哈</span></p>
+			<p>重新开始</p>
+		</div>
+	</div>
+	
+</body>
+<script>
+	var level = [1,2,3,4];
+	var box= document.getElementById('box');
+	var map= document.getElementById('map');
+	var levelo= document.getElementById('level');
+	var p= levelo.getElementsByTagName('p');
+	var final = document.getElementById('final');
+	var p2= final.getElementsByTagName('p');
+	var score = document.getElementById('score');
+	var plane_movetop;
+	var plane_moveleft;
+	var Maxtop;
+	var Maxleft;
+	var plane;
+	var biu;//子弹定时器
+	var ene;//敌军生产的定时器
+	box.score=0;
+
+	window.requestAnimationFrame = window.requestAnimationFrame || function (fn) {return setTimeout(fn,1000/60)};
+    window.cancelAnimationFrame = window.cancelAnimationFrame || clearTimeout;
+	// 点击按钮时游戏开始
+	for(i=0;i<p.length;i++){
+		p[i].index=i;
+		p[i].onclick=function(e){
+			e=e||window.event;
+			var pos={
+				pos_x:e.clientX,
+				pos_y:e.clientY
+			}
+			levelo.style.display='none';
+			start(pos);
+			time();
+			bgchoose(this.index);
+			//当分数达到时子弹变化
+			biu = setInterval(
+				function(){
+					if(box.score<10){
+						zidan(0);
+					}
+					else if(box.score<30){
+						zidan(3/2);
+						zidan(-3/2);						
+					}
+					else{
+						zidan(3/2);
+						zidan(-3/2);
+						zidan(0);
+						}},[600,500,400,300][this.index]);
+			ene =setInterval(enemy,[400,300,200,150][this.index]);
+
+		}
+		//产生我方飞机
+		function start(pos){
+			plane = document.createElement('img');
+			// var plane= new Image();
+			plane.src = 'img/plane_0.png';
+			plane.width=70;
+			plane.height=70;
+			plane.ondragstart="return false"
+			var plane_top=pos.pos_y-box.offsetTop-plane.height/2;
+			var plane_left=pos.pos_x-box.offsetLeft-plane.width/2;
+			plane.style.top=pos.pos_y-box.offsetTop-plane.height/2+'px';
+			plane.style.left=pos.pos_x-box.offsetLeft-plane.width/2+'px';
+			plane.className='plane';
+			map.appendChild(plane);
+
+			// 我方飞机的移动事件
+			document.onmousemove=function(e){
+				e=e||window.event;
+				plane_movetop= e.clientY-pos.pos_y+plane_top;
+				plane_moveleft=e.clientX-pos.pos_x+plane_left;
+				Maxtop=map.clientHeight-plane.height/2;
+				Maxleft=map.clientWidth-plane.width/2;
+				//限定飞机的移动边界
+				plane_movetop=Math.max(-plane.height/2,plane_movetop);
+				plane_movetop=Math.min(Maxtop,plane_movetop);
+				plane_moveleft=Math.max(-plane.width/2,plane_moveleft);
+				plane_moveleft=Math.min(Maxleft,plane_moveleft)
+				plane.style.top=plane_movetop+'px';
+				plane.style.left=plane_moveleft+'px';				
+			}
+		}
+	}
+	//重新开始
+	p2[3].onclick=function(){
+		window.location.href=window.location.href;
+	}
+	//背景运动
+	function bgchoose(g){
+		map.style.background="url('img/bg_"+[1,2,3,4][g]+".jpg')";
+		(function m (){
+			map.bgPosY = map.bgPosY || 0;
+        	map.bgPosY ++;
+        	map.style.backgroundPositionY=map.bgPosY+"px";
+        	requestAnimationFrame(m);
+		})();
+
+		
+	}
+	//产生飞机的子弹
+	function zidan(i){
+		var zidan = document.createElement('img');
+		zidan.width=20;
+		zidan.height=50;
+		zidan.src='img/fire.png';
+		var zidaninit_top=plane_movetop-zidan.height/2;
+		var zidaninit_left=plane_moveleft+plane.width/2-zidan.width/2+zidan.width*i;
+		zidan.style.left=zidaninit_left+'px';
+		zidan.style.top=zidaninit_top+'px';
+		zidan.className='zidan';
+		map.appendChild(zidan);
+		
+		zidanMove();
+		//子弹的运动
+		 function zidanMove(){
+		 	zidaninit_top=zidaninit_top-3;
+		 	
+		 	
+		 	if(zidan.parentNode&&zidaninit_top<-zidan.height){
+		 		cancelAnimationFrame(zidanMove);
+		 		map.removeChild(zidan);
+		 	}else{
+		 		zidan.style.top=zidaninit_top+'px';
+		 		requestAnimationFrame(zidanMove);					 		
+		 	}					 	
+		}
+	}
+	//产生敌方飞机
+	var number=0
+	function enemy(){
+		var enemy = document.createElement('img');
+		//敌军的随机速度
+		var speed = 8;
+		
+		//设置出现20个小飞机后出现大飞机
+		number++;
+		console.log(number%20)
+		if(number%20){
+			enemy.HP=1;
+			enemy.width = 50;
+			enemy.height= 50;
+			enemy.score=1;
+			enemy.src = 'img/enemy_small.png';
+			enemy.speed=speed+speed*(Math.random()*0.6-0.3);
+		}
+		else{
+			enemy.HP=10;
+			enemy.score=20;
+			enemy.width = 100;
+			enemy.height= 100;
+			enemy.src = 'img/enemy_big.png';
+			enemy.speed=speed/2;
+
+		}
+		enemy.className='enemy';
+		var enemy_top=-enemy.height;
+		var enemy_left=Math.random()*box.clientWidth-enemy.width/2;
+		enemy.style.top=enemy_top+'px';
+		enemy.style.left=enemy_left+'px';
+		map.appendChild(enemy);
+		
+		//敌方飞机的运动
+		function enemyMove(){
+			enemy_top+=enemy.speed;
+			if(enemy.parentNode&&enemy_top>box.clientHeight-enemy.height){
+				cancelAnimationFrame(enemyMove);
+				map.removeChild(enemy);
+			}else{
+				enemy.style.top=enemy_top+'px';
+				//子弹与敌军的碰撞检测
+				var allbiu =document.getElementsByClassName('zidan');
+				for(i=allbiu.length-1;i>=0;i--){
+					if(enemy.parentNode&&peng(allbiu[i],enemy)){
+						//敌军HP的云端
+						enemy.HP--;
+						if(enemy.HP==0){
+							Boom(enemy.offsetTop,enemy.offsetLeft,enemy.score==1?0:2);
+							map.removeChild(allbiu[i]);
+							map.removeChild(enemy);
+							box.score=box.score+enemy.score;
+						}else {
+							map.removeChild(allbiu[i]);
+							
+						}
+						
+						
+					}
+
+				}				
+				//敌军与我军的碰撞检测
+				if(plane.parentNode&&enemy.parentNode&&peng(enemy,plane)){
+					console.log(peng(enemy,plane));
+
+					Boom(enemy.offsetTop,enemy.offsetLeft,0);
+					//敌军爆炸图
+                    Boom(plane.offsetTop,plane.offsetLeft,1);
+                    //我军爆炸图
+                
+                    map.removeChild(enemy);//移除敌军
+                    
+                    map.removeChild(plane);//移除我军
+                                       
+                    gameover();
+                    return;
+
+				}else{					
+				};
+				requestAnimationFrame(enemyMove);
+				
+				// if(enemy_top<plane_movetop-enemy.height||enemy_top>plane_movetop+plane.height||enemy_left<plane_moveleft-enemy.width||enemy_left>plane_moveleft+plane.width){
+				// }else{
+				// 	alert(1);
+				// }
+			}			
+		}
+		requestAnimationFrame(enemyMove);
+	}
+
+	//碰撞检测的函数
+	function peng (obj1,obj2){
+		var T = obj1.offsetTop;
+		var L =obj1.offsetLeft;
+		var R = obj2.offsetLeft;
+		var B = obj2.offsetTop;
+		return !(T<B-obj1.height||T>B+obj2.height||L<R-obj1.width||L>R+obj2.width);
+		}
+	//爆炸函数
+	function Boom(T,L,i){
+		var boom = document.createElement('img');
+		boom.src = "img/"+["boom_small","plane_0","boom_big"][i]+".png";
+		boom.width=[50,70,100][i];
+		boom.height=[50,70,100][i];
+		boom.className='boom'+['',2,''][i];
+		boom.style.top=T+'px';
+		boom.style.left=L+'px';
+		map.appendChild(boom);
+		setTimeout(function(){
+			map.removeChild(boom)
+		},1000);
+		return ;
+	}
+	//得分函数
+	function score(){
+		var num=0
+		box.score=setInterval(function(){
+			num++;
+		},1000)
+		return num
+	}
+	//记时函数
+	function time(){
+		box.num=0
+		box.time=setInterval(function(){
+			box.num++;
+			score.firstElementChild.innerHTML=Math.floor(box.num/60)+"分"+box.num%60+"秒";
+		},1000)	
+	}
+	//获得称号
+	function hor(){
+		if(box.score<10){
+			p2[2].firstElementChild.innerHTML='你可能不适合这个游戏喔';
+		}
+		else if(box.score<30){
+			p2[2].firstElementChild.innerHTML='菜的抠脚';
+		}
+		else if(box.score<200){
+			p2[2].firstElementChild.innerHTML='初级航天员';
+		}
+		else if(box.num<500){
+			p2[2].firstElementChild.innerHTML='中级航天员';
+		}
+		else if(box.num<1000){
+			p2[2].firstElementChild.innerHTML='高级航天员';
+		}
+		else{
+			p2[2].firstElementChild.innerHTML='独孤求败';
+		}
+
+	}
+	//游戏结束
+	function gameover(){
+		document.onmousemove=null;
+		clearInterval(biu);
+		clearInterval(ene);
+		clearInterval(box.time);
+		hor();
+		final.style.display="block";
+		p2[0].firstElementChild.innerHTML=box.score;
+	}
+
+</script>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>天气预报接口</title>
+	<style>
+		.wrap{
+			width: 520px;
+			height: 520px;
+			margin: 30px auto;
+			border: 1px solid #ccc;
+
+		}
+		.wrap-box{
+			width: 300px;
+			margin: 10px auto;
+		}
+		.wrap-box input:nth-of-type(1){
+			width: 204px;
+			height: 34px;
+			border: 1px solid #ccc;
+			line-height: 34px;
+			text-indent: 15px;
+			outline: none;
+		}
+		.wrap-box input:nth-of-type(2){
+			width: 50px;
+			height: 40px;
+			color: #fff;
+			background-color: rgb(59,178,159);
+			border: none;
+		}
+		.wrap-bottom{
+			list-style: none;
+			font-weight:bolder;
+		}
+		.wrap-bottom li{
+			margin-top:10px;
+		}
+		.wrap-bottom li span{
+			font-weight:normal;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="wrap-box">
+			<input type="text" placeholder="请输入城市名">
+			<input type="button" value="查询">
+		</div>
+		<ul class="wrap-bottom">
+			<li>城市：<span></span></li>
+			<li>今日时间：<span></span></li>
+			<li>建议着装：<span></span></li>
+			<li>湿气：<span></span></li>
+			<li>出行：<span></span></li>
+			<li>气温：<span></span></li>
+			<li>婚嫁：<span></span></li>
+			<li>逛街：<span></span></li>
+			<li>天气：<span></span></li>
+			<li>星期：<span></span></li>
+			<li>风级大小：<span></span></li>
+		</ul>
+	</div>
+</body>
+<script>
+	var arr =['city','date_y','dressing_advice','dressing_index','exercise_index','temperature','travel_index','uv_index','weather','week','wind']
+	var body =document.getElementsByTagName("body")[0];
+	var inp=document.getElementsByTagName("input");
+	var li =document.getElementsByTagName('li');
+	var message;
+	function success(data){
+		message = data.result.today;
+		console.log(message);
+		for(i=0;i<li.length;i++){
+			li[i].firstElementChild.innerHTML=message[arr[i]];
+		}
+	}
+	inp[1].onclick=function(){
+		var val = inp[0].value;
+		var d = new Date().getTime();
+		if(!script){
+			var script = document.createElement('script');
+			script.src="http://v.juhe.cn/weather/index?cityname="+val+"&dtype=jsonp&callback=success&format=&key=35a4827672c198dd1b3ca961e521d05f";
+		}
+		 success.name = success.name+d;
+		body.appendChild(script);
+		script.onload=function(){
+			body.removeChild(script);
+			script=null;			
+		}
+	}
+</script>
+</html>

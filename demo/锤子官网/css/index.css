@@ -1,0 +1,440 @@
+@charset "utf-8";
+.hammer {
+  width: 10rem;
+  background-color: #eee;
+}
+.hammer-header {
+  position: fixed;
+  z-index: 999;
+  top: 0px;
+  left: 0px;
+  height: 50px;
+  width: 100%;
+  background-color: #000;
+}
+.hammer-header:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.head-navbox {
+  float: left;
+  display: block;
+  width: 60px;
+  height: 50px;
+  margin: 0px 5px;
+  background: url("../images/00-header/2.png") no-repeat 0px 0px;
+  background-size: 50px 350px;
+}
+.hammer-icon {
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  background: url("../images/00-header/1.png") no-repeat 0px 0px;
+  background-size: 50px 350px;
+}
+.hammer-body .lunbo {
+  background-color: #fff;
+  box-shadow: 0 0 40px 10px #ccc;
+}
+.hammer-body .lunbo-box {
+  overflow: hidden;
+  width: 9.34375rem;
+  margin: 70px auto 20px;
+  border-radius: 15px;
+}
+.hammer-body .swiper-container {
+  width: 9.34375rem;
+  height: 3.875rem;
+}
+.hammer-body .swiper-container .swiper-wrapper .swiper-slide {
+  width: 100%;
+  height: 100%;
+}
+.swiper-wrapper .swiper-slide a {
+  display: block;
+}
+.swiper-wrapper .swiper-slide img {
+  width: 100%;
+  height: 100%;
+}
+.hammer-body .swiper-container .swiper-pagination .swiper-pagination-bullet-active {
+  background: #fff;
+}
+.com-nav01 {
+  display: flex;
+  width: 9.375rem;
+  margin: 20px auto;
+  padding: 20px 0px;
+}
+.com-nav01 a {
+  display: block;
+  flex: 1;
+  text-align: center;
+}
+.com-nav01 a img {
+  width: 0.65625rem;
+  height: 0.65625rem;
+}
+.com-nav01 a p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 0.9375rem;
+  line-height: 0.9375rem;
+}
+.remen {
+  background-color: #fff;
+}
+.remen-title h2 {
+  width: 9.328125rem;
+  height: 0.9375rem;
+  line-height: 0.9375rem;
+  margin: auto;
+}
+.remen-title h2 a {
+  font-size: 0.21875rem;
+  float: right;
+}
+.remen-body {
+  width: 100%;
+  overflow: hidden;
+}
+.swiper-container-1 {
+  width: 100%;
+}
+.swiper-container-1 .swiper-slide {
+  width: 3.359375rem;
+  height: 5.578125rem;
+}
+.swiper-container-1 .swiper-slide .remen-text {
+  padding: 0.15625rem 0.28125rem 0.46875rem;
+}
+.swiper-container-1 .swiper-slide b {
+  display: block;
+  font-size: 0.375rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.swiper-container-1 .swiper-slide p {
+  font-size: 0.21875rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0.15625rem 0px;
+}
+.swiper-container-1 .swiper-slide p + i {
+  font-size: 0.125rem;
+  color: red;
+}
+.swiper-container-1 .swiper-slide i + span {
+  font-size: 0.25rem;
+  font-weight: bold;
+  color: red;
+}
+.swiper-container-1 .swiper-slide del {
+  text-decoration: line-through;
+}
+.swiper-container-1 .swiper-slide del i {
+  display: inline-block;
+  font-size: 0.125rem;
+}
+.swiper-container-1 .swiper-slide del span {
+  font-size: 0.15625rem;
+  color: #666;
+}
+.com-bannar {
+  width: 100%;
+  padding: 0.3125rem 0;
+  margin: 15px 0;
+  background-color: #fff;
+  overflow: hidden;
+}
+.com-bannar .swiper-container-2 .swiper-slide {
+  width: 7.34375rem;
+  height: 2.34375rem;
+}
+.com-bannar .swiper-container-2 .swiper-slide a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.rexiao {
+  overflow: hidden;
+  width: 100%;
+  background-color: #fff;
+}
+.rexiao h2 {
+  font-size: 0.53125rem;
+  height: 1.09375rem;
+  line-height: 1.09375rem;
+  text-indent: 0.3125rem;
+  color: #666;
+}
+.swiper-container-3 .swiper-slide div {
+  text-align: center;
+  padding-bottom: 0.9375rem;
+}
+.swiper-container-3 .swiper-slide div b {
+  font-size: 0.375rem;
+  line-height: 0.625rem;
+  height: 0.625rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.swiper-container-3 .swiper-slide div p {
+  font-size: 0.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 10px 0;
+}
+.swiper-container-3 .swiper-slide div i {
+  font-size: 0.21875rem;
+  overflow: hidden;
+  color: red;
+}
+.swiper-container-3 .swiper-slide div span {
+  font-size: 0.28125rem;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: red;
+}
+.rexiao-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+.rexiao-bottom a {
+  position: relative;
+  right: -1px;
+  display: flex;
+  width: 4.96875rem;
+  height: 1.65625rem;
+  border-top: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  align-items: center;
+}
+.rexiao-bottom a img {
+  width: 1rem;
+  height: 1rem;
+  margin: 0 15px;
+}
+.rexiao-bottom a p {
+  flex: 1;
+  font-size: 22px;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rexiao-bottom a i {
+  flex: none;
+  margin-right: 0.3125rem;
+  font-size: 0.34375rem;
+  font-weight: bold;
+}
+.com-bannar1 {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+  background-color: #fff;
+}
+.com-bannar1 div:nth-child(1) {
+  width: 290px;
+}
+.com-bannar1 div:nth-child(1) a {
+  display: block;
+  width: 4.53125rem;
+  height: 2.375rem;
+  margin-bottom: 0.3125rem;
+  box-shadow: 0 2px 15px 1px #ccc;
+}
+.com-bannar1 div a img {
+  width: 100%;
+  height: 100%;
+}
+.com-bannar1 div:nth-child(2) a {
+  display: block;
+  width: 4.53125rem;
+  height: 7.75rem;
+  box-shadow: 0 2px 15px 1px #ccc;
+}
+.com-rexiao {
+  padding: 0.234375rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.rexiao-box a {
+  display: block;
+  height: 4.53125rem;
+  width: 4.53125rem;
+}
+.rexiao-box a img {
+  width: 100%;
+  height: 100%;
+}
+.rexiao-box div {
+  width: 4.21875rem;
+  height: 2.1875rem;
+  padding: 0.234375rem 0px 0.46875rem 0.3125rem;
+}
+.rexiao-box div b {
+  font-size: 0.375rem;
+  line-height: 0.625rem;
+  height: 0.625rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rexiao-box div p {
+  font-size: 0.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0.15625rem 0;
+}
+.rexiao-box div i {
+  font-size: 0.21875rem;
+  overflow: hidden;
+  color: red;
+}
+.rexiao-box div span {
+  font-size: 0.28125rem;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: red;
+}
+.peijian {
+  background: #fff;
+  margin: 20px 0;
+}
+.peijian-title {
+  padding: 0.3125rem;
+  border-bottom: 1px solid #ccc;
+}
+.peijian-title h2 {
+  font-size: 0.40625rem;
+  color: #666;
+}
+.peijian-title h2 i {
+  float: right;
+  font-weight: bold;
+}
+.peijian-body {
+  padding: 0.3125rem;
+  border-bottom: 1px solid #ccc;
+}
+.peijian-body .p-img {
+  width: 3.359375rem;
+  height: 3.359375rem;
+}
+.peijian-body .p-img a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.peijian-body .p-img a img {
+  width: 100%;
+  height: 100%;
+}
+.p-text {
+  width: 3.359375rem;
+  height: 3.046875rem;
+  padding-top: 0.3125rem;
+  margin-left: 0.78125rem;
+}
+.p-text b {
+  color: #000;
+  font-size: 0.375rem;
+  line-height: 0.625rem;
+  height: 0.625rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.p-text p {
+  font-size: 0.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0.15625rem 0;
+}
+.p-text div a {
+  float: left;
+  width: 0.53125rem;
+  height: 0.3125rem;
+  border: 1px solid blue;
+  background-color: #E5EFFF;
+  border-radius: 0.078125rem;
+  font-size: 0.1875rem !important;
+  text-align: center;
+  margin-right: 0.15625rem;
+}
+.peijian-page {
+  margin: 0.3125rem 0;
+}
+.peijian-page span {
+  float: left;
+  width: 0.15625rem;
+  height: 0.15625rem;
+  margin-right: 0.15625rem;
+  border-radius: 50%;
+  background-color: #666;
+}
+.p-text span {
+  display: flex;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.p-text > span b {
+  line-height: 0.625rem;
+  color: red;
+  flex: 1;
+}
+.p-text > span del {
+  overflow: hidden;
+  display: flex;
+  flex: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 0.625rem;
+  font-size: 0.1875rem;
+}
+.yifu {
+  padding-bottom: 60px;
+}
+.hammer-foot .foot-nav {
+  position: fixed;
+  width: 100%;
+  left: 0px;
+  bottom: 0px;
+  display: flex;
+  height: 50px;
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+  z-index: 999;
+}
+.hammer-foot .foot-nav a {
+  display: block;
+  flex: 1;
+  text-align: center;
+}
+.hammer-foot .foot-nav a img {
+  width: 0.421875rem;
+  height: 0.421875rem;
+}
+.hammer-foot .foot-nav a h4 {
+  font-size: 12px;
+  color: #666;
+}
